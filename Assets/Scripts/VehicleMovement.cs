@@ -79,9 +79,10 @@ public class VehicleMovement : MonoBehaviour
 		Quaternion rotation = Quaternion.LookRotation(projection, groundNormal);
 		
 		rigidBody.MoveRotation(Quaternion.Lerp(rigidBody.rotation, rotation, Time.deltaTime * 10f));
-		
+
+
 		float angle = angleOfRoll * -InputManager.Instance.Rudder; //TODO verify
-		
+	
 		Quaternion bodyRotation = transform.rotation * Quaternion.Euler(0f, 0f, angle);
 		shipBody.rotation = Quaternion.Lerp(shipBody.rotation, bodyRotation, Time.deltaTime * 10f);
 	}

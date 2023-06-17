@@ -23,7 +23,7 @@ public class InputManager : MonoBehaviour
     
     void Update()
     {
-        print((Thruster, Rudder, IsBreaking, IsBoosted));
+       
     }
     
     public Vector2 Move => input.Player.Move.ReadValue<Vector2>();
