@@ -1,5 +1,5 @@
 {
-    "name": "PlayerInput",
+    "name": "CustomInput",
     "maps": [
         {
             "name": "Player",
@@ -24,9 +24,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Nitro",
+                    "name": "Boost",
                     "type": "Button",
                     "id": "1317ba02-d97e-45e7-9161-19e32759a0d8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "398d14a5-702a-4216-9826-417ce1ea9372",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -162,7 +171,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Nitro",
+                    "action": "Boost",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "856eb561-eccd-4b59-aa05-9fdd3634c7d7",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
