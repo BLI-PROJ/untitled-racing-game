@@ -8,6 +8,7 @@ public class VehicleMovement : MonoBehaviour
 	public float driveForce = 17f;			
 	public float slowingVelFactor = .99f;   
 	public float brakingVelFactor = .95f;   
+	public float boostedVelFactor = 1.05f;
 	public float angleOfRoll = 30f;			
 
 	[Header("Hover Settings")]
@@ -105,6 +106,8 @@ public class VehicleMovement : MonoBehaviour
 		
 		if (InputManager.Instance.IsBreaking) //TODO verify
 			rigidBody.velocity *= brakingVelFactor;
+		else if (InputManager.Instance.IsBoosted) //TODO verify
+			rigidBody.velocity *= boostedVelFactor;
 		
 		float propulsion = driveForce * InputManager.Instance.Thruster - drag * Mathf.Clamp(speed, 0f, terminalVelocity); //TODO verify
 		rigidBody.AddForce(transform.forward * propulsion, ForceMode.Acceleration);
