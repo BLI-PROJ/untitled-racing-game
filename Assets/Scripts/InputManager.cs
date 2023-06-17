@@ -23,12 +23,16 @@ public class InputManager : MonoBehaviour
     
     void Update()
     {
-        print(GetMove());
-        print(IsBreaking());
-        print(IsBoosted());
+        print((Thruster, Rudder, IsBreaking, IsBoosted));
     }
     
-    Vector2 GetMove() => input.Player.Move.ReadValue<Vector2>();
-    bool IsBreaking() => input.Player.Break.ReadValue<float>() != 0;
-    bool IsBoosted() => input.Player.Nitro.ReadValue<float>() != 0;
+    public Vector2 Move => input.Player.Move.ReadValue<Vector2>();
+    
+    public float Thruster => Move.y;
+    
+    public float Rudder => Move.x;
+
+    public bool IsBreaking => input.Player.Break.ReadValue<float>() != 0;
+    
+    public bool IsBoosted => input.Player.Nitro.ReadValue<float>() != 0;
 }
