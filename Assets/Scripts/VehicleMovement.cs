@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class VehicleMovement : MonoBehaviour
@@ -15,6 +16,9 @@ public class VehicleMovement : MonoBehaviour
 	public float hoverHeight = 1.5f;        
 	public float maxGroundDist = 5f;        
 	public float hoverForce = 300f;			
+	public float rotationLimit = 350f;
+	public float jumpFactor = 15f;
+
 	public LayerMask whatIsGround;			
 	public PIDController hoverPID;			
 
@@ -56,6 +60,7 @@ public class VehicleMovement : MonoBehaviour
 		
         isOnGround = physicsScene.Raycast(ray.origin, ray.direction, out hitInfo, maxGroundDist, whatIsGround);
         
+        
         if (isOnGround)
 		{
 			float height = hitInfo.distance;
@@ -67,6 +72,11 @@ public class VehicleMovement : MonoBehaviour
 			
 			rigidBody.AddForce(force, ForceMode.Acceleration);
 			rigidBody.AddForce(gravity, ForceMode.Acceleration);
+			
+			if (InputManager.Instance.IsJumping) //TODO verify
+				rigidBody.AddForce(Vector3.up * jumpFactor, ForceMode.VelocityChange);
+			
+			normalizeRotation();
 		}
         else
 		{
@@ -111,6 +121,23 @@ public class VehicleMovement : MonoBehaviour
 		
 		float propulsion = driveForce * InputManager.Instance.Thruster - drag * Mathf.Clamp(speed, 0f, terminalVelocity); //TODO verify
 		rigidBody.AddForce(transform.forward * propulsion, ForceMode.Acceleration);
+	}
+	
+	void normalizeRotation() // TODO
+	{
+		// if(transform.rotation.eulerAngles.x > rotationLimit){
+		// 	transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, Time.deltaTime * 10f);
+		// }
+ 	// 	
+		// if(transform.rotation.eulerAngles.y > rotationLimit){
+		// 	transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, Time.deltaTime * 10f);
+		// }
+ 	// 	
+		// if(transform.rotation.eulerAngles.z > rotationLimit){
+		// 	transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, Time.deltaTime * 10f);
+		// }
+		//
+		// print(transform.rotation.eulerAngles);
 	}
 
 	public float GetSpeedPercentage()

@@ -34,5 +34,7 @@ public class InputManager : MonoBehaviour
 
     public bool IsBreaking => input.Player.Break.ReadValue<float>() != 0;
     
-    public bool IsBoosted => input.Player.Nitro.ReadValue<float>() != 0;
+    public bool IsBoosted => input.Player.Boost.ReadValue<float>() != 0;
+    
+    public bool IsJumping => input.Player.Jump.ReadValue<float>() != 0;
 }
