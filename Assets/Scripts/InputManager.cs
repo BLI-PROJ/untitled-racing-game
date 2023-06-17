@@ -20,22 +20,15 @@ public class InputManager : MonoBehaviour
         input.Enable();
         input.Player.Enable();
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        var move = input.Player.Move.ReadValue<Vector2>();
-        var break_ = input.Player.Break.ReadValue<float>();
-        var nitro = input.Player.Nitro.ReadValue<float>();
-
-        print(move);
-        print(break_);
-        print(nitro);
+        print(GetMove());
+        print(IsBreaking());
+        print(IsBoosted());
     }
+    
+    Vector2 GetMove() => input.Player.Move.ReadValue<Vector2>();
+    bool IsBreaking() => input.Player.Break.ReadValue<float>() != 0;
+    bool IsBoosted() => input.Player.Nitro.ReadValue<float>() != 0;
 }
