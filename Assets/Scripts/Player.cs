@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
     
     public void Respawn()
     {
+        var rigidbody = GetComponent<Rigidbody>();
+        rigidbody.velocity = Vector3.zero;
+        
         if (lastCheckpoint == null)
         {
             transform.position = Checkpoint.fallback.spawnPosition;
@@ -27,5 +30,13 @@ public class Player : MonoBehaviour
         
         transform.position = lastCheckpoint.spawnPosition;
         transform.rotation = lastCheckpoint.spawnRotation;
+    }
+
+    private void FixedUpdate()
+    {
+        if (InputManager.Instance.IsRespawning)
+        {
+            Respawn();
+        }
     }
 }

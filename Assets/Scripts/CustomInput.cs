@@ -62,6 +62,15 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Respawn"",
+                    ""type"": ""Button"",
+                    ""id"": ""2f52cce3-829c-4503-a295-366bcb177bdb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -207,6 +216,17 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""603f9782-5791-41e9-a566-9f06166e0726"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Respawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -219,6 +239,7 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
         m_Player_Break = m_Player.FindAction("Break", throwIfNotFound: true);
         m_Player_Boost = m_Player.FindAction("Boost", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Respawn = m_Player.FindAction("Respawn", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -284,6 +305,7 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Break;
     private readonly InputAction m_Player_Boost;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Respawn;
     public struct PlayerActions
     {
         private @CustomInput m_Wrapper;
@@ -292,6 +314,7 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
         public InputAction @Break => m_Wrapper.m_Player_Break;
         public InputAction @Boost => m_Wrapper.m_Player_Boost;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Respawn => m_Wrapper.m_Player_Respawn;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -313,6 +336,9 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Respawn.started += instance.OnRespawn;
+            @Respawn.performed += instance.OnRespawn;
+            @Respawn.canceled += instance.OnRespawn;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -329,6 +355,9 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Respawn.started -= instance.OnRespawn;
+            @Respawn.performed -= instance.OnRespawn;
+            @Respawn.canceled -= instance.OnRespawn;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -352,5 +381,6 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
         void OnBreak(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnRespawn(InputAction.CallbackContext context);
     }
 }

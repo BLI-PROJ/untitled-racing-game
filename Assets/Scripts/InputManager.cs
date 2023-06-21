@@ -37,4 +37,6 @@ public class InputManager : MonoBehaviour
     public bool IsBoosted => input.Player.Boost.ReadValue<float>() != 0;
     
     public bool IsJumping => input.Player.Jump.ReadValue<float>() != 0;
+    
+    public bool IsRespawning => input.Player.Respawn.ReadValue<float>() != 0;
 }
